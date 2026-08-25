@@ -85,7 +85,7 @@ El director escribe y administra el contenido editorial del boletín. La secció
 
 ## Restricciones
 - Solo el director puede editar la sección editorial.
-- La sección debe estar en estado `pendiente` o `en_edicion` para编辑ar.
+- La sección debe estar en estado `pendiente` o `en_edicion` para editar.
 - Una vez completada, la sección es inmutable.
 
 ---
@@ -94,3 +94,5 @@ El director escribe y administra el contenido editorial del boletín. La secció
 - `GET /api/v1/boletines/{id}/secciones/{tipo}`
 - `PUT /api/v1/boletines/{id}/secciones/{tipo}`
 - `POST /api/v1/boletines/{id}/completar-seccion`
+
+> See [01-api-design.md](../architecture/01-api-design.md#secciones) for full request/response schemas.

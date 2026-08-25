@@ -1,8 +1,12 @@
 # Reglas de Negocio — NIA
 
+> See [functional-requirements.md](functional-requirements.md) for the complete functional requirements mapping.
+
 ## BN-01: Publicación cronológica por secciones
 
 Cada boletín se arma en orden cronológico de secciones. El sistema debe guiar al editor paso a paso a través de cada sección hasta completar la publicación.
+
+**Implemented by**: RF-01.2, RF-01.3
 
 **Orden obligatorio:**
 1. Editorial
@@ -23,6 +27,8 @@ Una sección debe estar marcada como "completada" antes de avanzar a la siguient
 - La editorial no requiere revisión de fuentes externas; es opinión del director.
 - Una editorial aprobada no se puede editar sin crear una nueva versión.
 
+**Implemented by**: RF-02.1, RF-02.2
+
 ---
 
 ## BN-03: Notas de colaboradores / Artículos de interés
@@ -36,6 +42,8 @@ Una sección debe estar marcada como "completada" antes de avanzar a la siguient
   - **Archivada para futuro**: revisada pero no incluida en el boletín actual.
 - Una nota aprobada se incluye en el próximo boletín; una archivada queda disponible para publicaciones futuras.
 - Cada nota debe registrar: autor, fecha de recepción, fuente/revista/organismo, y estado.
+
+**Implemented by**: RF-03.1, RF-03.2, RF-03.3, RF-03.4, RF-03.5, RF-03.6
 
 ---
 
@@ -54,6 +62,8 @@ Una sección debe estar marcada como "completada" antes de avanzar a la siguient
 - El artículo generado se presenta al editor para **revisión y corrección**.
 - El editor puede modificar libremente el texto generado por la IA.
 - El artículo editado se transforma al **formato de publicación** (definido en fase de diseño).
+
+**Implemented by**: RF-04A.1, RF-04A.2, RF-04A.3, RF-04A.4, RF-04B.1, RF-04B.2, RF-04B.3, RF-04B.4, RF-04B.5
 
 ### Campos del schema de incidentes
 
@@ -92,6 +102,8 @@ Campos adicionales sugeridos:
 - El editor puede **seleccionar y ordenar** qué incidentes aparecen en la tabla.
 - La tabla se incluye como sección del boletín.
 
+**Implemented by**: RF-05.1, RF-05.2, RF-05.3
+
 ---
 
 ## BN-06: Auspiciantes
@@ -99,6 +111,8 @@ Campos adicionales sugeridos:
 - El editor puede cargar información de auspiciantes (nombre, logo, enlace).
 - Los auspiciantes se muestran en la sección correspondiente del boletín.
 - Esta sección es de carga manual; no se genera con IA.
+
+**Implemented by**: RF-06.1, RF-06.2
 
 ---
 
@@ -108,6 +122,8 @@ Campos adicionales sugeridos:
 - Lista todas las secciones del boletín con enlaces internos.
 - Se actualiza si se modifica alguna sección después de generado.
 
+**Implemented by**: RF-07.1, RF-07.2
+
 ---
 
 ## BN-08: Almacenamiento del boletín completo
@@ -115,6 +131,8 @@ Campos adicionales sugeridos:
 - Una vez completado, el boletín se almacena como un documento cerrado.
 - El boletín almacenado es la **fuente de verdad** para distribución futura.
 - Un boletín cerrado no se puede editar; cualquier corrección requiere una nueva edición.
+
+**Implemented by**: RF-08.1, RF-08.2, RF-08.3
 
 ---
 
@@ -124,3 +142,5 @@ Campos adicionales sugeridos:
 - El director de editorial tiene acceso total.
 - Los colaboradores tienen acceso limitado a sus secciones asignadas.
 - Todas las acciones quedan registradas (quién, cuándo, qué).
+
+**Implemented by**: RF-09.1, RF-09.2, RF-09.3, RF-09.4, RF-09.5

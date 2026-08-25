@@ -24,4 +24,4 @@ El producto final es un **boletín informativo periódico** (`Noticias sobre Ino
 1. **Rigor antes que velocidad**: un dato incorrecto es peor que un dato tardío.
 2. **Transparencia de fuentes**: toda información publicada debe ser rastreable a su origen.
 3. **La IA como herramienta, no como autor**: la IA asiste en recopilación, interpretación y síntesis; la decisión editorial es humana.
-4. **Evolución incremental**: el boletín crece sección por sección,.Validate cada una antes de agregar la siguiente.
+4. **Evolución incremental**: el boletín crece sección por sección, validando cada una antes de agregar la siguiente.

@@ -124,3 +124,5 @@ El director genera un artículo sobre incidentes de inocuidad alimentaria utiliz
 - `POST /api/v1/incidentes/{boletin_id}/generar-articulo`
 - `GET /api/v1/incidentes/{boletin_id}/articulo`
 - `PUT /api/v1/incidentes/{boletin_id}/articulo`
+
+> See [01-api-design.md](../architecture/01-api-design.md#incidentes) for full request/response schemas.

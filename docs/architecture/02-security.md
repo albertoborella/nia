@@ -85,6 +85,8 @@ refresh_token:
 
 ### Control de acceso por endpoint
 
+> For full endpoint definitions, see [01-api-design.md](01-api-design.md).
+
 | Endpoint | Director | Colaborador | No autenticado |
 |----------|----------|-------------|----------------|
 | `POST /auth/login` | ✅ | ✅ | ✅ |
@@ -93,7 +95,7 @@ refresh_token:
 | `POST /boletines` | ✅ | ❌ | ❌ |
 | `PUT /boletines/{id}/secciones/editorial` | ✅ | ❌ | ❌ |
 | `POST /incidentes/consultar` | ✅ | ❌ | ❌ |
-| `POST /incidentes/{id}/generar-articulo` | ✅ | ❌ | ❌ |
+| `POST /incidentes/{boletin_id}/generar-articulo` | ✅ | ❌ | ❌ |
 | `POST /notas` (subir) | ✅ | ✅ | ❌ |
 | `GET /notas` (ver propias) | ✅ | ✅ | ❌ |
 | `PUT /notas/{id}/estado` | ✅ | ❌ | ❌ |

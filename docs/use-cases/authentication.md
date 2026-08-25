@@ -79,3 +79,5 @@ El usuario accede al sistema mediante credenciales válidas y obtiene una sesió
 - `POST /api/v1/auth/refresh`
 - `POST /api/v1/auth/logout`
 - `GET /api/v1/auth/me`
+
+> See [01-api-design.md](../architecture/01-api-design.md#autenticación) for full request/response schemas.

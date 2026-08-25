@@ -135,3 +135,5 @@ El director administra los usuarios del sistema: crear cuentas, asignar roles, e
 - `POST /api/v1/usuarios/{id}/reset-password`
 - `GET /api/v1/usuarios/{id}/actividad`
 - `PUT /api/v1/auth/change-password`
+
+> See [01-api-design.md](../architecture/01-api-design.md#usuarios) for full request/response schemas.

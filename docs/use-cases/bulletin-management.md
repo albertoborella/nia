@@ -110,3 +110,5 @@ borrador → en_progreso → completado → cerrado
 - `POST /api/v1/boletines/{id}/cerrar`
 - `POST /api/v1/boletines/{id}/compilar`
 - `GET /api/v1/boletines/{id}/exportar`
+
+> See [01-api-design.md](../architecture/01-api-design.md#boletines) for full request/response schemas.

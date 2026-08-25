@@ -129,3 +129,5 @@ El director administra los prompts predefinidos que se utilizan para consultas a
 - `PUT /api/v1/prompts/{id}`
 - `DELETE /api/v1/prompts/{id}`
 - `POST /api/v1/prompts/{id}/test`
+
+> See [01-api-design.md](../architecture/01-api-design.md#prompts) for full request/response schemas.

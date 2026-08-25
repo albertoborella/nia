@@ -99,8 +99,17 @@ Director y colaboradores administran incidentes de inocuidad alimentaria. Los in
 ---
 
 ## Estados del Incidente
+
+El incidente tiene dos dimensiones de estado independientes:
+
+### Estado de verificación (calidad de datos)
 ```
-confirmado → en_investigacion → descartado
+confirmado · en_investigacion · descartado
+```
+
+### Estado editorial (flujo de trabajo)
+```
+generado → revisado → aprobado → incluido
 ```
 
 ## Severidad
@@ -117,3 +126,5 @@ critico → alto → medio → bajo
 - `PUT /api/v1/incidentes/{id}`
 - `DELETE /api/v1/incidentes/{id}`
 - `POST /api/v1/incidentes/consultar`
+
+> See [01-api-design.md](../architecture/01-api-design.md#incidentes) for full request/response schemas.

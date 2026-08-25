@@ -93,7 +93,7 @@ Director y colaboradores suben, revisan y administran notas (artículos) en form
 1. El director selecciona una nota para eliminar.
 2. El frontend muestra confirmación: "¿Estás seguro? Esta acción no se puede deshacer."
 3. Si confirma, el frontend envía `DELETE /api/v1/notas/{id}`.
-4. El backend elimina el registro y el archivo associado.
+4. El backend elimina el registro y el archivo asociado.
 
 ### FA-04: Buscar Notas
 1. El usuario accede a `/notas` con filtros de búsqueda.
@@ -129,3 +129,5 @@ Director y colaboradores suben, revisan y administran notas (artículos) en form
 - `PUT /api/v1/notas/{id}`
 - `PUT /api/v1/notas/{id}/estado`
 - `GET /api/v1/notas/{id}/descarga`
+
+> See [01-api-design.md](../architecture/01-api-design.md#notas-de-colaboradores) for full request/response schemas.

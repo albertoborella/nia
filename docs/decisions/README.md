@@ -4,6 +4,20 @@ Registro de Decisiones de Arquitectura (ADR): decisiones importantes, su
 contexto, la alternativa elegida y el motivo.
 
 ---
+
+## ADRs
+
+| ADR | Decisión | Estado |
+|-----|----------|--------|
+| [ADR-001](ADR-001-tech-stack.md) | Technology Stack Selection | Accepted |
+| [ADR-002](ADR-002-authentication.md) | Authentication Strategy | Accepted |
+| [ADR-003](ADR-003-ai-integration.md) | AI Integration Approach | Accepted |
+| [ADR-004](ADR-004-document-processing.md) | Document Processing Strategy | Accepted |
+| [ADR-005](ADR-005-deployment.md) | Deployment Strategy | Accepted |
+| [ADR-006](ADR-006-data-model.md) | Data Modeling Approach | Accepted |
+
+---
+
 ## Formato ADR
 
 Cada decisión de arquitectura importante se registra como ADR numerado:

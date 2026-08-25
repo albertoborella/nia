@@ -23,7 +23,7 @@ Authenticate the user via email and password.
 
 ### Behavior
 
-- Submit calls `POST /api/v1/auth/login`.
+- Submit calls `POST /api/v1/auth/login`. See [01-api-design.md](../architecture/01-api-design.md#autenticación).
 - On success: redirect to `returnUrl` query param or `/dashboard`.
 - On failure: inline error message below form, password field cleared.
 - "Forgot password" link placeholder (not implemented in MVP).
@@ -64,7 +64,7 @@ Overview of all bulletins and recent activity.
 
 #### Active Bulletins
 
-Table of bulletins in `borrador` or `en_progreso` state.
+Table of bulletins in `borrador` or `en_progreso` state. See [01-api-design.md](../architecture/01-api-design.md#boletines) for endpoint details.
 
 | Column | Description |
 |--------|-------------|
@@ -221,7 +221,7 @@ Write the editorial introduction for the bulletin.
 
 | Action | Description |
 |--------|-------------|
-| Save | Persist current content via `PUT /api/v1/boletines/{id}/secciones/editorial` |
+| Save | Persist current content via `PUT /api/v1/boletines/{id}/secciones/editorial`. See [01-api-design.md](../architecture/01-api-design.md#secciones). |
 | Mark Complete | Calls `POST /api/v1/boletines/{id}/completar-seccion` with `tipo: "editorial"` |
 | Version History | Opens sidebar with previous versions (future) |
 
@@ -254,6 +254,8 @@ in this edition.
 Generate and edit the AI-written article about global food safety incidents.
 
 ### Workflow
+
+> For endpoint schemas, see [01-api-design.md](../architecture/01-api-design.md#incidentes).
 
 ```
 1. Select date range for query
@@ -440,7 +442,7 @@ Two-column grid:
 
 ### Actions
 
-- "Assign Selected" → saves to `PUT /api/v1/boletines/{id}/auspiciantes`
+- "Assign Selected" → saves to `PUT /api/v1/boletines/{id}/auspiciantes`. See [01-api-design.md](../architecture/01-api-design.md#auspiciantes-del-boletín).
 - "Mark as Complete"
 
 ### Empty State
@@ -516,6 +518,8 @@ View, filter, and manage all contributor notes.
 
 ### Table
 
+> For endpoint schemas, see [01-api-design.md](../architecture/01-api-design.md#notas-de-colaboradores).
+
 | Column | Description |
 |--------|-------------|
 | Title | Note title, clickable |
@@ -587,7 +591,7 @@ Upload a new contributor note.
 
 ### Behavior
 
-- Submit calls `POST /api/v1/notas` (multipart/form-data).
+- Submit calls `POST /api/v1/notas` (multipart/form-data). See [01-api-design.md](../architecture/01-api-design.md#notas-de-colaboradores).
 - On success: redirect to `/notas` with success toast.
 - On failure: inline error, form values preserved.
 
@@ -610,6 +614,8 @@ View and manage all incidents across all bulletins.
 - Filter bar: Country, Pathogen, Risk, Status, Date range, Bulletin
 
 ### Table
+
+> For endpoint schemas, see [01-api-design.md](../architecture/01-api-design.md#incidentes).
 
 | Column | Description |
 |--------|-------------|
@@ -770,7 +776,7 @@ Manage system users.
 
 ### Behavior
 
-- Save calls `PUT /api/v1/auth/me` (profile) or updates `localStorage` (appearance).
+- Save calls `PUT /api/v1/auth/me` (profile) or updates `localStorage` (appearance). See [01-api-design.md](../architecture/01-api-design.md#autenticación).
 - Success toast on save.
 
 ---

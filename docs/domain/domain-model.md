@@ -1,5 +1,7 @@
 # Modelo de Dominio — NIA
 
+> See [data-model.md](data-model.md) for the SQL schema and table definitions.
+
 ## Visión general
 
 NIA es un sistema editorial que produce **boletines informativos** sobre inocuidad alimentaria. Cada boletín se compone de **secciones** que se completan cronológicamente. El corazón del sistema es el pipeline de **incidentes**: datos estructurados provenientes de IA que se transforman en artículos periodísticos.
@@ -46,7 +48,7 @@ borrador → en_progreso → completado → cerrado
 ```
 - **borrador**: creado, sin secciones completadas.
 - **en_progreso**: al menos una sección completada.
-- **todas_las_secciones_completadas**:候补 para cierre.
+- **todas_las_secciones_completadas**: listo para cierre.
 - **cerrado**: inmutable, listo para distribución.
 
 ### Sección
@@ -66,6 +68,18 @@ pendiente → aprobada | archivada
 - **archivada**: revisada, disponible para publicaciones futuras.
 
 ### Incidente
+
+El incidente tiene **dos dimensiones de estado independientes** que se gestionan por separado:
+
+#### Estado de verificación (calidad de datos)
+```
+confirmado · en_investigacion · descartado
+```
+- **confirmado**: datos verificados contra fuentes oficiales.
+- **en_investigacion**: pendiente de verificación.
+- **descartado**: descartado tras investigación.
+
+#### Estado editorial (flujo de trabajo)
 ```
 generado → revisado → aprobado → incluido
 ```
@@ -95,3 +109,5 @@ Gestiona la compilación, cierre y distribución del boletín.
 Gestiona usuarios, autenticación y permisos.
 
 **Entidades**: Usuario, Rol, Sesión, Log de Auditoría.
+
+> Each context maps to specific tables in [data-model.md](data-model.md).

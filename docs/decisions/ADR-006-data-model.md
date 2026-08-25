@@ -62,7 +62,7 @@ Each section type stores type-specific content in `secciones.contenido`:
 ```sql
 -- High-frequency queries
 idx_incidentes_pais_fecha       → incident filtering by country + date range
-idx_incidentes_boletin_estado   → bulletin incident lookup
+idx_incidentes_boletin_estado_editorial → bulletin incident lookup
 idx_notas_estado_colaborador    → collaborator note filtering
 idx_secciones_boletin_orden     → section ordering within bulletins
 idx_log_auditoria_fecha         → audit log date range queries

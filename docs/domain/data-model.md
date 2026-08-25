@@ -107,6 +107,8 @@ CREATE TABLE secciones (
     tipo            VARCHAR(30) NOT NULL
                       CHECK (tipo IN ('editorial', 'incidentes', 'notas_colaboradores',
                                       'tabla_incidentes', 'auspiciantes', 'indice')),
+    -- Nota: El tipo 'indice' se incluye aquí para consistencia del esquema,
+    -- pero el contenido se genera dinámicamente por el endpoint GET /boletines/{id}/indice
     orden           INT NOT NULL,
     estado          VARCHAR(20) NOT NULL DEFAULT 'pendiente'
                       CHECK (estado IN ('pendiente', 'en_edicion', 'completada')),
@@ -158,8 +160,10 @@ CREATE TABLE incidentes (
     fuente_url        VARCHAR(1000),
     fuente_nombre     VARCHAR(500),
     fecha_consulta    DATE NOT NULL,
-    estado            VARCHAR(20) NOT NULL DEFAULT 'confirmado'
-                        CHECK (estado IN ('confirmado', 'en_investigacion', 'descartado')),
+    estado_verificacion VARCHAR(20) NOT NULL DEFAULT 'confirmado'
+                        CHECK (estado_verificacion IN ('confirmado', 'en_investigacion', 'descartado')),
+    estado_editorial VARCHAR(20) NOT NULL DEFAULT 'generado'
+                        CHECK (estado_editorial IN ('generado', 'revisado', 'aprobado', 'incluido')),
     severidad         VARCHAR(10) NOT NULL CHECK (severidad IN ('critico', 'alto', 'medio', 'bajo')),
     boletin_asignado  UUID REFERENCES boletines(id),
     creado_por        UUID REFERENCES usuarios(id),
@@ -171,7 +175,8 @@ CREATE INDEX idx_incidentes_pais ON incidentes(pais);
 CREATE INDEX idx_incidentes_patogeno ON incidentes(patogeno);
 CREATE INDEX idx_incidentes_riesgo ON incidentes(riesgo);
 CREATE INDEX idx_incidentes_fecha ON incidentes(fecha_inicio);
-CREATE INDEX idx_incidentes_estado ON incidentes(estado);
+CREATE INDEX idx_incidentes_estado_verificacion ON incidentes(estado_verificacion);
+CREATE INDEX idx_incidentes_estado_editorial ON incidentes(estado_editorial);
 CREATE INDEX idx_incidentes_boletin ON incidentes(boletin_asignado);
 ```
 
@@ -239,8 +244,8 @@ CREATE INDEX idx_log_auditoria_usuario ON log_auditoria(usuario_id);
 -- Buscar incidentes por país y rango de fechas
 CREATE INDEX idx_incidentes_pais_fecha ON incidentes(pais, fecha_inicio);
 
--- Buscar incidentes por boletín y estado
-CREATE INDEX idx_incidentes_boletin_estado ON incidentes(boletin_asignado, estado);
+-- Buscar incidentes por boletín y estado editorial
+CREATE INDEX idx_incidentes_boletin_estado_editorial ON incidentes(boletin_asignado, estado_editorial);
 
 -- Buscar notas por estado y colaborador
 CREATE INDEX idx_notas_estado_colaborador ON notas_colaboradores(estado, colaborador_id);

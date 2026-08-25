@@ -40,7 +40,7 @@ Cada parte del boletín. Las secciones se completan en orden cronológico.
 - **notas_colaboradores**: `{ "notas_ids": [...] }`
 - **tabla_incidentes**: `{ "incidentes_ids": [...], "orden_seleccion": [...] }`
 - **auspiciantes**: `{ "auspiciantes_ids": [...] }`
-- **indice**: `{ "generado_automaticamente": true, "items": [...] }`
+- **indice**: `{ "generado_automaticamente": true, "items": [...] }` (generado dinámicamente por el endpoint, no almacenado como sección)
 
 ---
 
@@ -87,7 +87,8 @@ Dato estructurado sobre un incidente de inocuidad alimentaria, generado por IA y
 | `fuente_url` | string | URL de la fuente original. |
 | `fuente_nombre` | string | Nombre del organismo o revista. |
 | `fecha_consulta` | date | Fecha en que se consultó la IA. |
-| `estado` | enum | `confirmado` · `en_investigacion` · `descartado` |
+| `estado_verificacion` | enum | `confirmado` · `en_investigacion` · `descartado` — calidad de datos |
+| `estado_editorial` | enum | `generado` · `revisado` · `aprobado` · `incluido` — flujo editorial |
 | `severidad` | enum | `critico` · `alto` · `medio` · `bajo` |
 | `boletin_asignado` | ref → Boletín | Boletín donde se incluyó (null si no asignado). |
 | `creado_por` | ref → Usuario | Quién ejecutó la consulta IA. |
@@ -136,7 +137,7 @@ Persona con acceso al sistema administrativo.
 |-------|------|-------------|
 | `id` | UUID | Identificador único. |
 | `nombre` | string | Nombre completo. |
-| `email` | string | Correo electrónico (únicopara login). |
+| `email` | string | Correo electrónico (únicamente para login). |
 | `password_hash` | string | Contraseña hasheada (bcrypt). |
 | `rol` | enum | `director` · `colaborador` |
 | `activo` | boolean | Si tiene acceso al sistema. |

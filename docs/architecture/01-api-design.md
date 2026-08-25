@@ -11,6 +11,8 @@
 
 ## Autenticación
 
+> **Use case**: [UC-01 — Autenticación y Autorización](../use-cases/authentication.md)
+
 ### POST /api/v1/auth/login
 Login del usuario.
 
@@ -73,7 +75,146 @@ Obtiene el usuario autenticado actual.
 
 ---
 
+### PUT /api/v1/auth/change-password
+Cambia la contraseña del usuario autenticado.
+
+**Request:**
+```json
+{
+  "current_password": "contraseña_actual",
+  "new_password": "nueva_contraseña"
+}
+```
+
+**Response (200):**
+```json
+{ "message": "Password updated" }
+```
+
+---
+
+## Usuarios
+
+> **Use case**: [UC-09 — Gestión de Usuarios](../use-cases/user-management.md)
+
+### GET /api/v1/usuarios
+Lista todos los usuarios activos (solo director).
+
+**Query params:** `?page=1&limit=20&rol=colaborador`
+
+**Response (200):**
+```json
+{
+  "items": [
+    {
+      "id": "uuid",
+      "nombre": "Juan Pérez",
+      "email": "juan@nia.com",
+      "rol": "colaborador",
+      "activo": true,
+      "fecha_creacion": "2026-01-15T10:00:00Z",
+      "ultimo_acceso": "2026-03-15T08:30:00Z"
+    }
+  ],
+  "total": 5,
+  "page": 1,
+  "limit": 20
+}
+```
+
+---
+
+### POST /api/v1/usuarios
+Crea un nuevo usuario (solo director).
+
+**Request:**
+```json
+{
+  "nombre": "Juan Pérez",
+  "email": "juan@nia.com",
+  "password": "contraseña_segura",
+  "rol": "colaborador"
+}
+```
+
+**Response (201):**
+```json
+{
+  "id": "uuid",
+  "nombre": "Juan Pérez",
+  "email": "juan@nia.com",
+  "rol": "colaborador",
+  "activo": true,
+  "fecha_creacion": "2026-03-15T10:00:00Z"
+}
+```
+
+---
+
+### PUT /api/v1/usuarios/{id}
+Actualiza un usuario (solo director).
+
+**Request:**
+```json
+{
+  "nombre": "Juan Pérez Updated",
+  "email": "juan.updated@nia.com",
+  "rol": "colaborador"
+}
+```
+
+**Response (200):**
+```json
+{
+  "id": "uuid",
+  "nombre": "Juan Pérez Updated",
+  "email": "juan.updated@nia.com",
+  "rol": "colaborador",
+  "activo": true,
+  "fecha_creacion": "2026-01-15T10:00:00Z"
+}
+```
+
+---
+
+### POST /api/v1/usuarios/{id}/reset-password
+Restablece la contraseña de un usuario (solo director). Genera una contraseña temporal y la envía por email.
+
+**Response (200):**
+```json
+{ "message": "Password reset email sent" }
+```
+
+---
+
+### GET /api/v1/usuarios/{id}/actividad
+Obtiene el log de auditoría de un usuario (solo director).
+
+**Query params:** `?page=1&limit=20`
+
+**Response (200):**
+```json
+{
+  "items": [
+    {
+      "id": "uuid",
+      "accion": "login",
+      "fecha": "2026-03-15T08:30:00Z",
+      "ip": "192.168.1.100",
+      "detalles": "Login exitoso"
+    }
+  ],
+  "total": 15,
+  "page": 1,
+  "limit": 20
+}
+```
+
+---
+
 ## Boletines
+
+> **Use case**: [UC-02 — Gestión de Boletines](../use-cases/bulletin-management.md)
 
 ### GET /api/v1/boletines
 Lista boletines del usuario.
@@ -164,6 +305,8 @@ Cierra el boletín (solo si todas las secciones están completadas).
 
 ## Secciones
 
+> **Use case**: [UC-03 — Sección Editorial](../use-cases/editorial-section.md)
+
 ### GET /api/v1/boletines/{id}/secciones
 Lista las secciones de un boletín.
 
@@ -190,6 +333,8 @@ Actualiza el contenido de una sección.
 
 ## Notas de Colaboradores
 
+> **Use case**: [UC-05 — Gestión de Notas de Colaboradores](../use-cases/contributor-notes.md)
+
 ### GET /api/v1/notas
 Lista todas las notas.
 
@@ -211,6 +356,44 @@ Sube una nueva nota (multipart/form-data).
 
 ### GET /api/v1/notas/{id}
 Detalle de una nota.
+
+---
+
+### PUT /api/v1/notas/{id}
+Actualiza los metadatos de una nota (sin modificar el archivo).
+
+**Request:**
+```json
+{
+  "titulo": "Nuevo título del artículo",
+  "autor": "Autor Actualizado",
+  "fuente": "Revista Nueva",
+  "tema": "regulación"
+}
+```
+
+**Response (200):**
+```json
+{
+  "id": "uuid",
+  "titulo": "Nuevo título del artículo",
+  "autor": "Autor Actualizado",
+  "fuente": "Revista Nueva",
+  "tema": "regulación",
+  "estado": "pendiente",
+  "fecha_recepcion": "2026-03-10T10:00:00Z"
+}
+```
+
+---
+
+### DELETE /api/v1/notas/{id}
+Elimina una nota y su archivo asociado (solo director).
+
+**Response (200):**
+```json
+{ "message": "Note deleted" }
+```
 
 ---
 
@@ -236,6 +419,82 @@ Descarga el archivo de la nota.
 ---
 
 ## Incidentes
+
+> **Use cases**: [UC-06 — Gestión de Incidentes](../use-cases/incident-management.md), [UC-04 — Artículo de Incidentes Mundiales](../use-cases/global-incidents-article.md)
+
+### POST /api/v1/incidentes
+Crea un incidente manualmente (solo director).
+
+**Request:**
+```json
+{
+  "incidente": "Brote de Salmonella en leche",
+  "producto": "Leche entera",
+  "patogeno": "Salmonella enteritidis",
+  "organismo": "Lácteos XYZ",
+  "pais": "Argentina",
+  "riesgo": "alto",
+  "fecha_inicio": "2026-03-05",
+  "fecha_cierre": null,
+  "observaciones": "Retiro voluntario de 50.000 litros",
+  "texto_noticia": "...",
+  "fuente_url": "https://...",
+  "fuente_nombre": "ANMAT",
+  "severidad": "alto",
+  "estado": "confirmado"
+}
+```
+
+**Response (201):**
+```json
+{
+  "id": "uuid",
+  "incidente": "Brote de Salmonella en leche",
+  "producto": "Leche entera",
+  "patogeno": "Salmonella enteritidis",
+  "organismo": "Lácteos XYZ",
+  "pais": "Argentina",
+  "riesgo": "alto",
+  "fecha_inicio": "2026-03-05",
+  "fecha_cierre": null,
+  "observaciones": "Retiro voluntario de 50.000 litros",
+  "texto_noticia": "...",
+  "fuente_url": "https://...",
+  "fuente_nombre": "ANMAT",
+  "severidad": "alto",
+  "estado": "confirmado",
+  "fecha_creacion": "2026-03-15T10:00:00Z"
+}
+```
+
+---
+
+### GET /api/v1/incidentes/{id}
+Obtiene un incidente por ID.
+
+**Response (200):**
+```json
+{
+  "id": "uuid",
+  "incidente": "Brote de Salmonella en leche",
+  "producto": "Leche entera",
+  "patogeno": "Salmonella enteritidis",
+  "organismo": "Lácteos XYZ",
+  "pais": "Argentina",
+  "riesgo": "alto",
+  "fecha_inicio": "2026-03-05",
+  "fecha_cierre": null,
+  "observaciones": "Retiro voluntario de 50.000 litros",
+  "texto_noticia": "...",
+  "fuente_url": "https://...",
+  "fuente_nombre": "ANMAT",
+  "severidad": "alto",
+  "estado": "confirmado",
+  "fecha_creacion": "2026-03-15T10:00:00Z"
+}
+```
+
+---
 
 ### POST /api/v1/incidentes/consultar
 Consulta a la IA sobre incidentes en un período.
@@ -328,6 +587,8 @@ Guarda la versión editada del artículo.
 
 ## Prompts
 
+> **Use case**: [UC-10 — Gestión de Prompts de IA](../use-cases/prompt-management.md)
+
 ### GET /api/v1/prompts
 Lista prompts disponibles.
 
@@ -338,8 +599,41 @@ Crea un nuevo prompt (solo director).
 
 ---
 
+### GET /api/v1/prompts/{id}
+Obtiene un prompt por ID.
+
+**Response (200):**
+```json
+{
+  "id": "uuid",
+  "nombre": "Consulta Incidentes Mensual",
+  "descripcion": "Busca incidentes de inocuidad en un período dado",
+  "template": "Busca incidentes de inocuidad alimentaria desde {{periodo_inicio}} hasta {{periodo_fin}}.",
+  "tipo": "consulta_incidentes",
+  "configuracion": {
+    "modelo": "gpt-4",
+    "temperatura": 0.3,
+    "max_tokens": 2000
+  },
+  "activo": true,
+  "fecha_creacion": "2026-03-01T10:00:00Z"
+}
+```
+
+---
+
 ### PUT /api/v1/prompts/{id}
 Actualiza un prompt.
+
+---
+
+### DELETE /api/v1/prompts/{id}
+Elimina un prompt (solo director).
+
+**Response (200):**
+```json
+{ "message": "Prompt deleted" }
+```
 
 ---
 
@@ -349,6 +643,8 @@ Prueba un prompt con datos de ejemplo.
 ---
 
 ## Auspiciantes
+
+> **Use case**: [UC-08 — Gestión de Auspiciantes](../use-cases/sponsors-management.md)
 
 ### GET /api/v1/auspiciantes
 Lista auspiciantes activos.
@@ -372,6 +668,8 @@ Desactiva un auspiciante (soft delete).
 
 ## Tabla de Incidentes Destacados
 
+> **Use case**: [UC-07 — Tabla de Incidentes Destacados](../use-cases/world-incidents-table.md)
+
 ### GET /api/v1/boletines/{id}/tabla-incidentes
 Obtiene la tabla de incidentes seleccionados para el boletín.
 
@@ -391,6 +689,8 @@ Actualiza la selección y orden de incidentes de la tabla.
 ---
 
 ## Auspiciantes del Boletín
+
+> **Use case**: [UC-08 — Gestión de Auspiciantes](../use-cases/sponsors-management.md)
 
 ### GET /api/v1/boletines/{id}/auspiciantes
 Lista auspiciantes asignados al boletín.
@@ -412,7 +712,20 @@ Actualiza los auspiciantes del boletín.
 ## Índice
 
 ### GET /api/v1/boletines/{id}/indice
-Genera y retorna el índice del boletín.
+Genera y retorna el índice del boletín. El índice se genera dinámicamente a partir de las secciones del boletín, no se almacena como una sección separada en la base de datos.
+
+**Response (200):**
+```json
+{
+  "indice": [
+    { "seccion": "editorial", "titulo": "Editorial del mes", "pagina": 1 },
+    { "seccion": "incidentes", "titulo": "Incidentes Globales", "pagina": 2 },
+    { "seccion": "notas_colaboradores", "titulo": "Notas de Colaboradores", "pagina": 5 },
+    { "seccion": "tabla_incidentes", "titulo": "Tabla de Incidentes", "pagina": 8 },
+    { "seccion": "auspiciantes", "titulo": "Auspiciantes", "pagina": 10 }
+  ]
+}
+```
 
 ---
 

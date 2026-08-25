@@ -105,3 +105,5 @@ El director administra los auspiciantes (patrocinadores) que aparecen en los bol
 - `DELETE /api/v1/auspiciantes/{id}`
 - `GET /api/v1/boletines/{id}/auspiciantes`
 - `PUT /api/v1/boletines/{id}/auspiciantes`
+
+> See [01-api-design.md](../architecture/01-api-design.md#auspiciantes) for full request/response schemas.

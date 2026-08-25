@@ -100,3 +100,5 @@ El director genera y administra la tabla de incidentes destacados que se incluye
 - `GET /api/v1/boletines/{id}/tabla-incidentes`
 - `PUT /api/v1/boletines/{id}/tabla-incidentes`
 - `GET /api/v1/incidentes`
+
+> See [01-api-design.md](../architecture/01-api-design.md#tabla-de-incidentes-destacados) for full request/response schemas.

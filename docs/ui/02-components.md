@@ -258,6 +258,10 @@ Colored badge for entity states.
 | `confirmado` | `success` |
 | `en_investigacion` | `warning` |
 | `descartado` | `default` |
+| `generado` | `default` |
+| `revisado` | `info` |
+| `aprobado` | `success` |
+| `incluido` | `success` |
 | `alto` / `critico` | `danger` |
 | `medio` | `warning` |
 | `bajo` | `success` |
