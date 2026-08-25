@@ -10,6 +10,23 @@ Los campos json que te pasé creo que serían de interés para armar una buena n
 Considero que las notas o artículos los podríamos comprender a todos como externos en .pdf o .doxs, ya que si personal de la misma editorial desea escribir un artículo lo puede hacer de la misma forma y luego incluirlo en la plataforma para revisarlo. 
 La distribucion queda para despues. En principio haremos pruebas pilotos hasta ajustar todos los detalles.
 
+Antes de seguir he olvidado de decirte que el repositorio del proyecto es el siguiente:
+git@github.com:albertoborella/nia.git
+
+Sigamos con el domain (modelo de dominio y entidades)
+
+El stack tecnologico que quiero utilizar es el siguiente:
+
+	Frontend → Svelte/SvelteKit ultima version
+	Backend → FastAPI ultima version y SQLModel
+	Base de datos → PostgreSQL
+	Autenticación → JWT + cookies
+	Refresh token → obligatorio
+	Persistencia de sesiones/tokens (duración de las sesiones típicas de redes sociales)
+	Manejo de imágenes → dejar preparado, pero sin implementar en MVP
+	API → REST
+	Proyecto bajo contenedores de Podman - vamos a usar imagenes públicas de AWS (evitar imagenes de Docker)
+
 
 
 
