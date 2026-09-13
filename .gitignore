@@ -1,0 +1,27 @@
+# Environment
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.pytest_cache/
+
+# Node
+node_modules/
+frontend/build/
+frontend/.svelte-kit/
+
+# Backend data & uploads
+backend/uploads/
+backend/backend/uploads/
+backend/data/
+
+# Postgres data (volume)
+postgres/pgdata/
+
+# IDE
+.vscode/
+.idea/
+prompts

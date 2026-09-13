@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  postgres:
+    build:
+      context: ./postgres
+      dockerfile: Dockerfile
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=nia
+      - POSTGRES_USER=nia_user
+      - POSTGRES_PASSWORD=nia_pass
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U nia_user -d nia"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/app:/app/app
+    environment:
+      - DATABASE_URL=postgresql://nia_user:nia_pass@postgres:5432/nia
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-dev-secret-change-in-production}
+      - JWT_ALGORITHM=HS256
+      - CORS_ORIGINS=http://localhost:5173,http://localhost:3000
+      - ENVIRONMENT=development
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:3000"
+    volumes:
+      - ./frontend/src:/app/src
+    environment:
+      - BACKEND_URL=http://backend:8000
+      - PORT=3000
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
